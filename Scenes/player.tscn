@@ -120,3 +120,21 @@ position = Vector2(14, -5)
 position = Vector2(1056, 95)
 scale = Vector2(2, 2)
 texture = ExtResource("4_vgqql")
+
+[node name="Chamber1" type="Node2D" parent="CanvasLayer/Cylinder" unique_id=898424101]
+position = Vector2(0, -20)
+
+[node name="Chamber2" type="Node2D" parent="CanvasLayer/Cylinder" unique_id=45221798]
+position = Vector2(-17, -10)
+
+[node name="Chamber3" type="Node2D" parent="CanvasLayer/Cylinder" unique_id=79340557]
+position = Vector2(-17, 10)
+
+[node name="Chamber4" type="Node2D" parent="CanvasLayer/Cylinder" unique_id=1377179652]
+position = Vector2(0, 20)
+
+[node name="Chamber5" type="Node2D" parent="CanvasLayer/Cylinder" unique_id=730989381]
+position = Vector2(17, 10.5)
+
+[node name="Chamber6" type="Node2D" parent="CanvasLayer/Cylinder" unique_id=1022361287]
+position = Vector2(17, -10)

@@ -7,10 +7,11 @@ const bullet_scene = preload("res://bullet.tscn")
 @onready var projectile: Control = $Projectile
 
 
-func shoot(spawn_position: Vector2, bullet_rotation: float, layer: int, mask: int, col: Color) -> void:
+func shoot(spawn_position: Vector2, bullet_rotation: float, layer: int, mask: int, col: Color, speed: float) -> void:
 	var bullet = bullet_scene.instantiate()
 	
 	bullet.color = col
+	bullet.speed = speed
 
 	bullet.global_position = spawn_position
 	bullet.global_rotation = bullet_rotation

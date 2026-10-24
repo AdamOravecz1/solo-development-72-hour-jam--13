@@ -108,7 +108,7 @@ func death():
 
 func _on_timer_timeout() -> void:
 	shoot_timer.wait_time = randf_range(3, 6)
-	main.shoot(fire_point.global_position, pivot_point.global_rotation, 2, 2, Color(0.651, 0.145, 0.0, 1.0))
+	main.shoot(fire_point.global_position, pivot_point.global_rotation, 2, 2, Color(0.651, 0.145, 0.0, 1.0), 250)
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
