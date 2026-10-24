@@ -42,3 +42,12 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "spawn":
 		animated_sprite.play("walk")
 		speed = 50.0
+	if animated_sprite.animation == "death":
+		queue_free()
+
+
+func _on_hurt_box_body_entered(body: Node2D) -> void:
+	if body == player:
+		body.hit(3)
+		health == 0
+		death()

@@ -122,6 +122,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_obmiq"]
+size = Vector2(28, 38)
+
 [node name="Ghost" type="CharacterBody2D" unique_id=1294749427]
 collision_layer = 4
 collision_mask = 4
@@ -131,8 +134,17 @@ script = ExtResource("1_6attn")
 shape = SubResource("RectangleShape2D_6attn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=728685603]
+z_index = 100
 sprite_frames = SubResource("SpriteFrames_0fo3v")
 animation = &"death"
 autoplay = "spawn"
 
+[node name="HurtBox" type="Area2D" parent="." unique_id=1944194081]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1312455978]
+shape = SubResource("RectangleShape2D_obmiq")
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]

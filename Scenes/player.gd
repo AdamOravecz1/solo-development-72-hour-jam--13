@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var revolver: Sprite2D = $PivotPoint/Revolver
 @onready var fire_point: Node2D = $PivotPoint/Revolver/FirePoint
 @onready var cylinder: Sprite2D = $CanvasLayer/Cylinder
+@onready var health_bar: TextureProgressBar = $CanvasLayer/HealthBar
+
 
 var bullet_types: Array[String] = ["regular", "regular", "regular", "regular", "regular", "regular"]
 var regular_bullet_texture: Texture2D = preload("res://Sprites/RegularBullet.png")
@@ -22,7 +24,10 @@ var recoil_tween: Tween
 @onready var main = get_tree().current_scene
 var fire_point_start: Vector2
 
+var health: int = 10
+
 func _ready() -> void:
+	health_bar.max_value = health
 	fire_point_start = fire_point.position
 
 	for i in cylinder.get_children():
@@ -56,6 +61,9 @@ func _process(delta: float) -> void:
 	elif direction[0] < 0:
 		animated_sprite.flip_h = true
 		
+	if Input.is_action_just_pressed("reload") and can_shoot:
+		reload()
+		
 		
 	if Input.is_action_just_pressed("shoot") and can_shoot:
 		if reload_needed:
@@ -72,7 +80,8 @@ func _process(delta: float) -> void:
 
 		
 func hit(dam):
-	return
+	health -= dam
+	health_bar.value = health
 	
 
 func rotate_cylinder() -> void:
@@ -139,7 +148,8 @@ func reload() -> void:
 
 	# Wait for the actual animation to finish.
 	await tween.finished
-
+	
+	chamber_pointer = 0
 	chamber_pointer = 0
 	reload_needed = false
 	can_shoot = true

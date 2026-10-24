@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://cjyr7jdimc0oj" path="res://Scenes/player.gd" id="2_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://knm57ja1d6ue" path="res://Sprites/Revolver.png" id="3_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://8ond87ohyrb2" path="res://Sprites/Cylinder.png" id="4_vgqql"]
+[ext_resource type="Texture2D" uid="uid://ddskuk02iemsw" path="res://Sprites/Over.png" id="5_fkybt"]
+[ext_resource type="Texture2D" uid="uid://br7ddkey4mee0" path="res://Sprites/Progress.png" id="6_x3wgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
 atlas = ExtResource("1_cvnsp")
@@ -101,7 +103,6 @@ position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_pu2lt")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=435106093]
-zoom = Vector2(1.5, 1.5)
 
 [node name="PivotPoint" type="Node2D" parent="." unique_id=1658408642]
 position = Vector2(0, -9)
@@ -117,7 +118,7 @@ position = Vector2(14, -5)
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=812537736]
 
 [node name="Cylinder" type="Sprite2D" parent="CanvasLayer" unique_id=1740640642]
-position = Vector2(1056, 95)
+position = Vector2(1049, 108)
 scale = Vector2(2, 2)
 texture = ExtResource("4_vgqql")
 
@@ -138,3 +139,13 @@ position = Vector2(17, 10.5)
 
 [node name="Chamber6" type="Node2D" parent="CanvasLayer/Cylinder" unique_id=1022361287]
 position = Vector2(17, -10)
+
+[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer" unique_id=563681923]
+offset_left = 985.0
+offset_top = 7.0
+offset_right = 1025.0
+offset_bottom = 47.0
+max_value = 10.0
+value = 10.0
+texture_over = ExtResource("5_fkybt")
+texture_progress = ExtResource("6_x3wgy")
