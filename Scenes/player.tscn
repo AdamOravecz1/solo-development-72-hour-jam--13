@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b3n7a611hgbid" path="res://Sprites/Player.png" id="1_cvnsp"]
 [ext_resource type="Script" uid="uid://cjyr7jdimc0oj" path="res://Scenes/player.gd" id="2_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://knm57ja1d6ue" path="res://Sprites/Revolver.png" id="3_6t5aa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
 atlas = ExtResource("1_cvnsp")
@@ -97,3 +98,15 @@ position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_pu2lt")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=435106093]
+zoom = Vector2(2, 2)
+
+[node name="PivotPoint" type="Node2D" parent="." unique_id=1658408642]
+position = Vector2(0, -9)
+
+[node name="Revolver" type="Sprite2D" parent="PivotPoint" unique_id=1137173085]
+texture_filter = 1
+position = Vector2(27, 0)
+texture = ExtResource("3_6t5aa")
+
+[node name="FirePoint" type="Node2D" parent="PivotPoint/Revolver" unique_id=281283130]
+position = Vector2(14, -5)
