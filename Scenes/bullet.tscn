@@ -1,19 +1,19 @@
 [gd_scene format=3 uid="uid://htisxx5jtmth"]
 
 [ext_resource type="Texture2D" uid="uid://0fb1lxgwqdlq" path="res://Sprites/Bullet.png" id="1_v7oki"]
-[ext_resource type="Script" uid="uid://gthd20u1b08h" path="res://bullet.gd" id="1_v8qja"]
+[ext_resource type="Script" uid="uid://gthd20u1b08h" path="res://Scenes/bullet.gd" id="1_v8qja"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v8qja"]
-size = Vector2(6, 5)
+size = Vector2(8, 8)
 
 [node name="Bullet" type="Area2D" unique_id=1575905685]
 script = ExtResource("1_v8qja")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=245121672]
-position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_v8qja")
 
 [node name="Bullet" type="Sprite2D" parent="." unique_id=284124194]
+scale = Vector2(2, 2)
 texture = ExtResource("1_v7oki")
 
 [node name="Timer" type="Timer" parent="." unique_id=780278749]

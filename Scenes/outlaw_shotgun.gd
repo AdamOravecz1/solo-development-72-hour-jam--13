@@ -10,9 +10,10 @@ extends CharacterBody2D
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var pivot_point: Node2D = $PivotPoint
-@onready var revolver: Sprite2D = $PivotPoint/Revolver
-@onready var fire_point: Node2D = $PivotPoint/Revolver/FirePoint
+@onready var revolver: Sprite2D = $PivotPoint/Shotgun
+@onready var fire_point: Node2D = $PivotPoint/Shotgun/FirePoint
 @onready var shoot_timer: Timer = $ShootTimer
+@onready var dust: AnimatedSprite2D = $Dust
 
 
 @onready var main = get_tree().current_scene
@@ -95,6 +96,7 @@ func hit(damage):
 		death()
 		
 func death():
+	player.give_money(5)
 	shoot_timer.stop()
 	collision_layer = 0
 	collision_mask = 0
@@ -108,9 +110,24 @@ func death():
 
 func _on_timer_timeout() -> void:
 	shoot_timer.wait_time = randf_range(3, 6)
-	main.shoot(fire_point.global_position, pivot_point.global_rotation, 2, 2, Color(0.651, 0.145, 0.0, 1.0), 250)
+	shoot_triple(2, 2, Color(0.651, 0.145, 0.0, 1.0), 250, 1)
 
+func shoot_triple(mask: int, layer: int, bullet_color: Color, bullet_speed: int, damage: int) -> void:
+	var spread = deg_to_rad(10.0)
+
+	for angle in [-spread, 0.0, spread]:
+		main.shoot(
+			fire_point.global_position,
+			pivot_point.global_rotation + angle,
+			mask,
+			layer,
+			bullet_color,
+			bullet_speed,
+			damage
+		)
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if health <= 0:
 		main.spawn_ghost(global_position)
+		dust.visible = true
+		dust.play("kickup")
