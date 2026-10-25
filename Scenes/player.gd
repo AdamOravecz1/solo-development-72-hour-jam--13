@@ -128,12 +128,15 @@ func reload() -> void:
 	for i in range(chambers.size()):
 		bullet_types.append("regular" if randf() < 0.5 else "ghost")
 
-	# Start the cylinder spin.
+	var current_chamber = chamber_pointer % 6
+	var alignment_rotation = (6 - current_chamber) % 6 * 60.0
+	var target_rotation = cylinder.rotation_degrees + 360.0 + alignment_rotation
+
 	var tween = create_tween()
 	tween.tween_property(
 		cylinder,
 		"rotation_degrees",
-		cylinder.rotation_degrees + 360.0,
+		target_rotation,
 		1.0
 	)
 

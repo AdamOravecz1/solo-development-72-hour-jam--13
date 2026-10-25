@@ -3,8 +3,8 @@ extends Control
 const ghost_scene = preload("res://ghost.tscn")
 const bullet_scene = preload("res://bullet.tscn")
 
-@onready var enemies: Control = $Enemies
-@onready var projectile: Control = $Projectile
+@onready var enemies: Control = $ForSorting/Enemies
+@onready var projectile: Control = $ForSorting/Projectile
 
 
 func shoot(spawn_position: Vector2, bullet_rotation: float, layer: int, mask: int, col: Color, speed: float) -> void:
