@@ -133,3 +133,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		main.spawn_ghost(global_position)
 		dust.visible = true
 		dust.play("kickup")
+		await get_tree().create_timer(5).timeout
+		var tween = create_tween()
+		tween.tween_property($AnimatedSprite2D, "modulate", Color(0.0, 0.0, 0.0, 0.0), 1)
+		await tween.finished
+		queue_free()

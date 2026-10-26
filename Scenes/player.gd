@@ -20,6 +20,7 @@ var triple_bullet_texture: Texture2D = preload("res://Sprites/TripleIcon.png")
 var ghost_fast_bullet_texture: Texture2D = preload("res://Sprites/FastGhostIcon.png")
 var ghost_triple_bullet_texture: Texture2D = preload("res://Sprites/TripleGhostIcon.png")
 var can_shoot = true
+var stopped = false
 var reload_needed = false
 
 var chamber_pointer: int = 0
@@ -35,7 +36,7 @@ var is_dodging: bool = false
 var dodge_direction: Vector2 = Vector2.ZERO
 
 var health: int = 1
-var money: int = 100
+var money: int = 0
 
 var fast_unlocked: bool = false
 var triple_unlocked: bool = false
@@ -49,6 +50,8 @@ var ghost_damage: int = 1
 var ghost_fast_damage: int = 1
 var ghost_triple_damage: int = 1
 
+var score: int = 0
+
 func _ready() -> void:
 	health_bar.max_value = health
 	fire_point_start = fire_point.position
@@ -60,6 +63,9 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if stopped:
+		return
+	
 	if health <= 0:
 		return
 	var direction = Input.get_vector("left", "right", "up", "down")
@@ -178,6 +184,9 @@ func death():
 	else: 
 		global_position.x += 18
 		camera_2d.global_position.x -= 18
+		
+	await get_tree().create_timer(3).timeout
+	main.death()
 
 
 func rotate_cylinder() -> void:
@@ -294,6 +303,10 @@ func reload() -> void:
 func give_money(n):
 	money += n
 	money_label.text = str(money) + "$"
+	main.spawn_level += 1
+	main.update_spawn_interval()
+	main.increase_score()
+	$CanvasLayer/Score.text = str(main.spawn_level)
 
 
 func heal():

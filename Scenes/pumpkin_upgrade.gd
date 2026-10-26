@@ -6,7 +6,7 @@ extends Area2D
 
 
 @onready var player = get_tree().get_first_node_in_group("Player")
-
+@onready var main = get_tree().current_scene
 
 func _ready():
 	if not Engine.is_editor_hint():
@@ -18,12 +18,15 @@ func _shop():
 	if canvas_layer.visible:
 		animated_sprite.play("up")
 		$Sounds/GetUp.play()
+		Engine.time_scale = 0.2
 	else:
 		animated_sprite.play("down")
 		$Sounds/GetDown.play()
+		Engine.time_scale = 1
 
 func _on_body_exited(body: Node2D) -> void:
 	if body == player and canvas_layer.visible:
+		Engine.time_scale = 1
 		animated_sprite.play("down")
 		$Sounds/GetDown.play()
 		player.can_shoot = true

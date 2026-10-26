@@ -15,17 +15,34 @@ const bullet_scene = preload("res://Scenes/bullet.tscn")
 @export var base_spawn_interval: float = 20.0
 @export var minimum_spawn_interval: float = 2.0
 
+@onready var player = get_tree().get_first_node_in_group("Player")
+
+@onready var color_rect: ColorRect = $CanvasLayer/ColorRect
+@onready var label: Label = $CanvasLayer/Label
+@onready var button: Button = $CanvasLayer/Button
+@onready var score_label: Label = $CanvasLayer/ScoreLabel
+
+
+
 var spawn_level: int = 0
 var spawn_timer: float = 0.0
 var spawn_interval: float = 20.0
 
+var paused = false
 
 func _ready() -> void:
 	update_spawn_interval()
 	spawn_timer = spawn_interval
+	get_tree().paused = true
 
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("pause") and player.can_shoot:
+		paused = !paused
+		$CanvasLayer/Pause.visible = paused
+		Engine.time_scale = 0 if paused else 1
+		player.stopped = paused
+		
 	spawn_timer -= delta
 
 	if spawn_timer <= 0.0:
@@ -33,10 +50,12 @@ func _process(delta: float) -> void:
 		spawn_timer = spawn_interval
 
 
+	
+
 func update_spawn_interval() -> void:
 	spawn_interval = maxf(
 		minimum_spawn_interval,
-		base_spawn_interval - spawn_level * 0.1
+		base_spawn_interval - spawn_level * 0.5
 	)
 
 
@@ -47,15 +66,29 @@ func spawn_enemy() -> void:
 		return
 
 	var spawn_position := get_random_spawn_position(camera)
+	var enemy
 
 	if randf() < 0.7:
-		var enemy = enemy_scene.instantiate()
-		enemies.add_child(enemy)
-		enemy.global_position = spawn_position
+		enemy = enemy_scene.instantiate()
 	else:
-		var enemy = shotgun_enemy_scene.instantiate()
-		enemies.add_child(enemy)
-		enemy.global_position = spawn_position
+		enemy = shotgun_enemy_scene.instantiate()
+
+	enemies.add_child(enemy)
+	enemy.global_position = spawn_position
+	enemy.health = get_enemy_health()
+
+
+func spawn_ghost(pos) -> void:
+	var ghost
+
+	if randf() > 0.5:
+		ghost = angry_ghost_scene.instantiate()
+	else:
+		ghost = ghost_scene.instantiate()
+
+	enemies.add_child(ghost)
+	ghost.global_position = pos
+	ghost.health = get_enemy_health()
 
 
 func get_random_spawn_position(camera: Camera2D) -> Vector2:
@@ -86,19 +119,6 @@ func get_random_spawn_position(camera: Camera2D) -> Vector2:
 	return area_min
 
 
-func spawn_ghost(pos) -> void:
-	var n = randf()
-
-	if n > 0.5:
-		var ghost = angry_ghost_scene.instantiate()
-		ghost.global_position = pos
-		enemies.add_child(ghost)
-	else:
-		var ghost = ghost_scene.instantiate()
-		ghost.global_position = pos
-		enemies.add_child(ghost)
-
-
 func shoot(
 	spawn_position: Vector2,
 	bullet_rotation: float,
@@ -122,3 +142,56 @@ func shoot(
 	bullet.collision_mask = 1 << (mask - 1)
 
 	projectile.add_child(bullet)
+
+func get_enemy_health() -> int:
+	return 5 + int(spawn_level / 4)
+
+
+func _on_button_pressed() -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), 0.0)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), 0.0)
+	Engine.time_scale = 1.0
+	get_tree().reload_current_scene()
+
+
+func death() -> void:
+	color_rect.visible = true
+	label.visible = true
+	button.visible = true
+	score_label.visible = true
+
+	var music_bus := AudioServer.get_bus_index("Music")
+	var sfx_bus := AudioServer.get_bus_index("SFX")
+
+	var tween := create_tween()
+	tween.set_parallel(true)
+
+	tween.tween_property(color_rect, "modulate", Color.BLACK, 3.0)
+	tween.tween_property(label, "modulate", Color.WHITE, 3.0)
+	tween.tween_property(button, "modulate", Color.WHITE, 3.0)
+	tween.tween_property(score_label, "modulate", Color.WHITE, 3.0)
+
+	if music_bus != -1:
+		tween.tween_method(
+			func(volume: float): AudioServer.set_bus_volume_db(music_bus, volume),
+			AudioServer.get_bus_volume_db(music_bus),
+			-80.0,
+			3.0
+		)
+
+	if sfx_bus != -1:
+		tween.tween_method(
+			func(volume: float): AudioServer.set_bus_volume_db(sfx_bus, volume),
+			AudioServer.get_bus_volume_db(sfx_bus),
+			-80.0,
+			3.0
+		)
+
+
+func _on_start_pressed() -> void:
+	$CanvasLayer/Start.visible = false
+	$CanvasLayer/Start.disabled = true
+	get_tree().paused = false
+	
+func increase_score():
+	score_label.text = "Score: " + str(spawn_level)
