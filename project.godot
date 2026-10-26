@@ -13,7 +13,7 @@ config_version=5
 config/name="SoloDevelopment 72-hour Jam #13"
 run/main_scene="uid://pq2mvhgxv5lt"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://28fwqf80vk77"
 
 [audio]
 
@@ -25,7 +25,9 @@ InteractionManager="*uid://dk1e1e71nejyx"
 
 [display]
 
+window/subwindows/embed_subwindows=false
 window/stretch/mode="viewport"
+mouse_cursor/custom_image="uid://cgh3df7x2fyur"
 
 [global_group]
 

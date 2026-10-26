@@ -55,7 +55,7 @@ func _process(delta: float) -> void:
 func update_spawn_interval() -> void:
 	spawn_interval = maxf(
 		minimum_spawn_interval,
-		base_spawn_interval - spawn_level * 0.5
+		base_spawn_interval - spawn_level * 1
 	)
 
 
@@ -144,7 +144,7 @@ func shoot(
 	projectile.add_child(bullet)
 
 func get_enemy_health() -> int:
-	return 5 + int(spawn_level / 4)
+	return 5 + int(spawn_level / 10)
 
 
 func _on_button_pressed() -> void:

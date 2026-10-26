@@ -80,7 +80,7 @@ region = Rect2(128, 64, 64, 64)
 atlas = ExtResource("1_ln706")
 region = Rect2(0, 128, 64, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_87yi5"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_k4tmx"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -114,7 +114,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 2.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -148,7 +148,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"up",
-"speed": 5.0
+"speed": 25.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_twh7v"]
@@ -163,8 +163,8 @@ script = ExtResource("1_mnawb")
 shape = SubResource("CircleShape2D_f42hk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=614459559]
-sprite_frames = SubResource("SpriteFrames_87yi5")
-animation = &"regular"
+sprite_frames = SubResource("SpriteFrames_k4tmx")
+animation = &"up"
 autoplay = "regular"
 
 [node name="InteractionArea" parent="." unique_id=1018041909 instance=ExtResource("2_5p73w")]

@@ -13,7 +13,6 @@ func _ready():
 		interaction_area.interact = Callable(self, "_shop")
 		
 func _shop():
-	main.pause()
 	canvas_layer.visible = !canvas_layer.visible
 	player.can_shoot = !canvas_layer.visible
 	if canvas_layer.visible:

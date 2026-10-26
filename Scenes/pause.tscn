@@ -30,7 +30,7 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -183.5
-offset_top = -67.5
+offset_top = -64.5
 offset_right = 183.5
 offset_bottom = 67.5
 grow_horizontal = 2
@@ -38,23 +38,31 @@ grow_vertical = 2
 
 [node name="Label2" type="Label" parent="NinePatchRect/VBoxContainer" unique_id=1248142523]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("2_l2mpd")
 text = "Sound"
 horizontal_alignment = 1
 
 [node name="Sound" type="HSlider" parent="NinePatchRect/VBoxContainer" unique_id=245117760]
+z_index = 100
 layout_mode = 2
+size_flags_vertical = 3
 max_value = 1.0
 step = 0.01
 
 [node name="Label" type="Label" parent="NinePatchRect/VBoxContainer" unique_id=906727466]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("2_l2mpd")
 text = "Music"
 horizontal_alignment = 1
 
 [node name="Music" type="HSlider" parent="NinePatchRect/VBoxContainer" unique_id=1918845046]
+z_index = 100
 layout_mode = 2
+size_flags_vertical = 3
 max_value = 1.0
 step = 0.01
 

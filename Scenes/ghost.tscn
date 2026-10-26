@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://pprjfa4a4ddm" path="res://Scenes/ghost.gd" id="1_6attn"]
 [ext_resource type="Texture2D" uid="uid://de8en56rl2bf5" path="res://Sprites/Ghost.png" id="1_v5pp4"]
-[ext_resource type="Texture2D" uid="uid://c211hn07rjge8" path="res://Sprites/AngryGhost.png" id="2_thbej"]
 [ext_resource type="AudioStream" uid="uid://8v0bdmbmoe43" path="res://Sounds/GhostAttack.mp3" id="4_uta0k"]
 [ext_resource type="AudioStream" uid="uid://ifewll5u1l7q" path="res://Sounds/GhostDeath.mp3" id="5_st3at"]
 [ext_resource type="AudioStream" uid="uid://dfhld0etm7eqw" path="res://Sounds/GhostSpawn.mp3" id="6_7hbae"]
@@ -10,12 +9,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6attn"]
 size = Vector2(28, 38)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w1rqv"]
-atlas = ExtResource("2_thbej")
+[sub_resource type="AtlasTexture" id="AtlasTexture_taxxh"]
+atlas = ExtResource("1_v5pp4")
 region = Rect2(64, 128, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uq7e1"]
-atlas = ExtResource("2_thbej")
+[sub_resource type="AtlasTexture" id="AtlasTexture_thbej"]
+atlas = ExtResource("1_v5pp4")
 region = Rect2(128, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kjq22"]
@@ -46,34 +45,34 @@ region = Rect2(64, 64, 64, 64)
 atlas = ExtResource("1_v5pp4")
 region = Rect2(128, 64, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_s76qj"]
-atlas = ExtResource("2_thbej")
+[sub_resource type="AtlasTexture" id="AtlasTexture_uta0k"]
+atlas = ExtResource("1_v5pp4")
 region = Rect2(0, 128, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j8u66"]
-atlas = ExtResource("2_thbej")
+[sub_resource type="AtlasTexture" id="AtlasTexture_st3at"]
+atlas = ExtResource("1_v5pp4")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_l2gpr"]
-atlas = ExtResource("2_thbej")
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hbae"]
+atlas = ExtResource("1_v5pp4")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bnf57"]
-atlas = ExtResource("2_thbej")
+[sub_resource type="AtlasTexture" id="AtlasTexture_xoekh"]
+atlas = ExtResource("1_v5pp4")
 region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_50pma"]
-atlas = ExtResource("2_thbej")
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdkt2"]
+atlas = ExtResource("1_v5pp4")
 region = Rect2(0, 64, 64, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_0fo3v"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_prwv0"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w1rqv")
+"texture": SubResource("AtlasTexture_taxxh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_uq7e1")
+"texture": SubResource("AtlasTexture_thbej")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kjq22")
@@ -102,7 +101,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_bqjpw")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_s76qj")
+"texture": SubResource("AtlasTexture_uta0k")
 }],
 "loop": false,
 "name": &"spawn",
@@ -110,16 +109,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_j8u66")
+"texture": SubResource("AtlasTexture_st3at")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_l2gpr")
+"texture": SubResource("AtlasTexture_7hbae")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bnf57")
+"texture": SubResource("AtlasTexture_xoekh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_50pma")
+"texture": SubResource("AtlasTexture_vdkt2")
 }],
 "loop": true,
 "name": &"walk",
@@ -139,8 +138,8 @@ shape = SubResource("RectangleShape2D_6attn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=728685603]
 z_index = 100
-sprite_frames = SubResource("SpriteFrames_0fo3v")
-animation = &"death"
+sprite_frames = SubResource("SpriteFrames_prwv0")
+animation = &"walk"
 autoplay = "spawn"
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=1944194081]

@@ -35,7 +35,7 @@ var fire_point_start: Vector2
 var is_dodging: bool = false
 var dodge_direction: Vector2 = Vector2.ZERO
 
-var health: int = 1
+var health: int = 10
 var money: int = 0
 
 var fast_unlocked: bool = false
@@ -354,7 +354,7 @@ func upgrade_single():
 		$Control/Pay.play()
 		money -= 5
 		money_label.text = str(money) + "$"
-		single_damage = 3
+		single_damage = 2
 		print(single_damage)
 		
 func upgrade_fast():
@@ -362,35 +362,35 @@ func upgrade_fast():
 		$Control/Pay.play()
 		money -= 7
 		money_label.text = str(money) + "$"
-		fast_damage = 3
+		fast_damage = 2
 		
 func upgrade_triple():
 	if money >= 10:
 		$Control/Pay.play()
 		money -= 10
 		money_label.text = str(money) + "$"
-		triple_damage = 3
+		triple_damage = 2
 		
 func upgrade_ghost():
 	if money >= 5:
 		$Control/Pay.play()
 		money -= 5
 		money_label.text = str(money) + "$"
-		ghost_damage = 3
+		ghost_damage = 2
 		
 func upgrade_ghost_fast():
 	if money >= 7:
 		$Control/Pay.play()
 		money -= 7
 		money_label.text = str(money) + "$"
-		ghost_fast_damage = 3
+		ghost_fast_damage = 2
 		
 func upgrade_ghost_triple():
 	if money >= 10:
 		$Control/Pay.play()
 		money -= 10
 		money_label.text = str(money) + "$"
-		ghost_triple_damage = 3
+		ghost_triple_damage = 2
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
