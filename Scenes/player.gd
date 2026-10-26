@@ -64,6 +64,12 @@ func _process(delta: float) -> void:
 		return
 	var direction = Input.get_vector("left", "right", "up", "down")
 	velocity = direction * speed
+	
+	if velocity != Vector2.ZERO and not $Control/Walk.playing and not is_dodging:
+		print("playing")
+		$Control/Walk.pitch_scale = randf_range(0.85, 1.15)
+		$Control/Walk.play()
+	
 	if Input.is_action_just_pressed("dodge") and not is_dodging:
 		is_dodging = true
 		dodge_direction = Input.get_vector("left", "right", "up", "down")
@@ -110,6 +116,7 @@ func _process(delta: float) -> void:
 		if reload_needed:
 			reload()
 		else:
+			$Control/Shoot.play()
 			var bullet_type = bullet_types[chamber_pointer % 6]
 			var bullet_speed = 250
 
@@ -160,6 +167,7 @@ func hit(dam):
 		
 func death():
 	animated_sprite.play("death")
+	$Control/Death.play()
 
 	collision_layer = 0
 	collision_mask = 0
@@ -202,6 +210,7 @@ func bullet_take_out():
 
 
 func reload() -> void:
+	$Control/Reload.play()
 	can_shoot = false
 	reload_needed = false
 	bullet_types.clear()
@@ -289,6 +298,7 @@ func give_money(n):
 
 func heal():
 	if money >= 3:
+		$Control/Pay.play()
 		money -= 3
 		money_label.text = str(money) + "$"
 		health = 10
@@ -297,6 +307,7 @@ func heal():
 
 func unlock_fast():
 	if money >= 20 and not fast_unlocked:
+		$Control/Pay.play()
 		money -= 20
 		money_label.text = str(money) + "$"
 		fast_unlocked = true
@@ -304,6 +315,7 @@ func unlock_fast():
 
 func unlock_triple():
 	if money >= 20 and not triple_unlocked:
+		$Control/Pay.play()
 		money -= 20
 		money_label.text = str(money) + "$"
 		triple_unlocked = true
@@ -311,6 +323,7 @@ func unlock_triple():
 
 func unlock_ghost_fast():
 	if money >= 20 and not ghost_fast_unlocked:
+		$Control/Pay.play()
 		money -= 20
 		money_label.text = str(money) + "$"
 		ghost_fast_unlocked = true
@@ -318,12 +331,14 @@ func unlock_ghost_fast():
 
 func unlock_ghost_triple():
 	if money >= 20 and not ghost_triple_unlocked:
+		$Control/Pay.play()
 		money -= 20
 		money_label.text = str(money) + "$"
 		ghost_triple_unlocked = true
 		
 func upgrade_single():
 	if money >= 5:
+		$Control/Pay.play()
 		money -= 5
 		money_label.text = str(money) + "$"
 		single_damage = 3
@@ -331,37 +346,42 @@ func upgrade_single():
 		
 func upgrade_fast():
 	if money >= 7:
+		$Control/Pay.play()
 		money -= 7
 		money_label.text = str(money) + "$"
 		fast_damage = 3
 		
 func upgrade_triple():
 	if money >= 10:
+		$Control/Pay.play()
 		money -= 10
 		money_label.text = str(money) + "$"
 		triple_damage = 3
 		
 func upgrade_ghost():
 	if money >= 5:
+		$Control/Pay.play()
 		money -= 5
 		money_label.text = str(money) + "$"
 		ghost_damage = 3
 		
 func upgrade_ghost_fast():
 	if money >= 7:
+		$Control/Pay.play()
 		money -= 7
 		money_label.text = str(money) + "$"
 		ghost_fast_damage = 3
 		
 func upgrade_ghost_triple():
 	if money >= 10:
+		$Control/Pay.play()
 		money -= 10
 		money_label.text = str(money) + "$"
 		ghost_triple_damage = 3
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
-	print("huh")
-	dust.show()
-	dust.play("kickup")
-	print(dust.sprite_frames.has_animation("kickup"))
+	if animated_sprite.animation == "death":
+		dust.show()
+		dust.play("kickup")
+		print(dust.sprite_frames.has_animation("kickup"))

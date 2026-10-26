@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://cp2p5v8e37fr3" path="res://Sprites/GhostIcon.png" id="8_k7k6j"]
 [ext_resource type="Texture2D" uid="uid://78w4hlask5x6" path="res://Sprites/TripleGhostIcon.png" id="9_vphq2"]
 [ext_resource type="Texture2D" uid="uid://bm2yv6ukf5n7l" path="res://Sprites/FastGhostIcon.png" id="10_fjb3n"]
+[ext_resource type="AudioStream" uid="uid://b64urdm5soxv" path="res://Sounds/GetUp.mp3" id="11_v4has"]
+[ext_resource type="AudioStream" uid="uid://bolqedqlacfvs" path="res://Sounds/Getdown.mp3" id="12_k4tmx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f42hk"]
 radius = 72.02777
@@ -291,6 +293,17 @@ offset_right = 731.0
 offset_bottom = 356.0
 theme_override_fonts/font = ExtResource("4_0mls7")
 text = "10$"
+
+[node name="Sounds" type="Node2D" parent="." unique_id=355403705]
+
+[node name="GetUp" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1341279499]
+stream = ExtResource("11_v4has")
+bus = &"SFX"
+
+[node name="GetDown" type="AudioStreamPlayer2D" parent="Sounds" unique_id=915521758]
+stream = ExtResource("12_k4tmx")
+pitch_scale = 2.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

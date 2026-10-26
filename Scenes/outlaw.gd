@@ -97,6 +97,7 @@ func hit(damage):
 		
 func death():
 	player.give_money(2)
+	$Sounds/Death.play()
 	shoot_timer.stop()
 	collision_layer = 0
 	collision_mask = 0
@@ -110,6 +111,7 @@ func death():
 
 func _on_timer_timeout() -> void:
 	shoot_timer.wait_time = randf_range(3, 6)
+	$Sounds/Shoot.play()
 	main.shoot(fire_point.global_position, pivot_point.global_rotation, 2, 2, Color(0.651, 0.145, 0.0, 1.0), 250, 1)
 
 

@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bac8q3wvdo48p" path="res://Scenes/interaction_area.tscn" id="3_syw7a"]
 [ext_resource type="Texture2D" uid="uid://coq7bd26cadue" path="res://Sprites/Heart.png" id="4_twh7v"]
 [ext_resource type="FontFile" uid="uid://cowoy8yrr4rp7" path="res://PixelOperator.ttf" id="5_tgifl"]
+[ext_resource type="AudioStream" uid="uid://b64urdm5soxv" path="res://Sounds/GetUp.mp3" id="6_ws2ld"]
+[ext_resource type="AudioStream" uid="uid://bolqedqlacfvs" path="res://Sounds/Getdown.mp3" id="7_itmsq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f42hk"]
 radius = 72.02777
@@ -201,6 +203,17 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("5_tgifl")
 text = "One full heal costs 3$"
+
+[node name="Sounds" type="Node2D" parent="." unique_id=1187936231]
+
+[node name="GetUp" type="AudioStreamPlayer2D" parent="Sounds" unique_id=999304809]
+stream = ExtResource("6_ws2ld")
+bus = &"SFX"
+
+[node name="GetDown" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1166121944]
+stream = ExtResource("7_itmsq")
+pitch_scale = 2.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

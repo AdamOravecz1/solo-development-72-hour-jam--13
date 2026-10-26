@@ -32,11 +32,13 @@ func hit(damage):
 	if health >= 0:
 		health -= damage
 	if health <= 0:
+		$Sounds/Death.play()
 		death()
 		
 func death():
+	
 	animated_sprite.play("death")
-	player.give_money(5)
+	player.give_money(3)
 
 
 
@@ -50,6 +52,6 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 func _on_hurt_box_body_entered(body: Node2D) -> void:
 	if body == player:
-		body.hit(5)
-		health == 0
+		body.hit(3)
+		$Sounds/Attack.play()
 		death()

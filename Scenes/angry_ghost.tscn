@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://5djgfes1ka7k"]
 
-[ext_resource type="Script" uid="uid://pprjfa4a4ddm" path="res://Scenes/ghost.gd" id="1_jqxds"]
+[ext_resource type="Script" uid="uid://ukyrbad35amy" path="res://Scenes/angry_ghost.gd" id="1_uq7e1"]
 [ext_resource type="Texture2D" uid="uid://de8en56rl2bf5" path="res://Sprites/Ghost.png" id="2_jdbyt"]
 [ext_resource type="Texture2D" uid="uid://c211hn07rjge8" path="res://Sprites/AngryGhost.png" id="2_smn57"]
+[ext_resource type="AudioStream" uid="uid://8v0bdmbmoe43" path="res://Sounds/GhostAttack.mp3" id="4_s76qj"]
+[ext_resource type="AudioStream" uid="uid://ifewll5u1l7q" path="res://Sounds/GhostDeath.mp3" id="5_j8u66"]
+[ext_resource type="AudioStream" uid="uid://dfhld0etm7eqw" path="res://Sounds/GhostSpawn.mp3" id="6_l2gpr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6attn"]
 size = Vector2(28, 38)
@@ -129,7 +132,7 @@ size = Vector2(28, 38)
 [node name="AngryGhost" type="CharacterBody2D" unique_id=1294749427]
 collision_layer = 4
 collision_mask = 4
-script = ExtResource("1_jqxds")
+script = ExtResource("1_uq7e1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1386183800]
 shape = SubResource("RectangleShape2D_6attn")
@@ -139,7 +142,7 @@ z_index = 100
 sprite_frames = SubResource("SpriteFrames_0fo3v")
 animation = &"walk"
 autoplay = "spawn"
-frame_progress = 0.32491913
+frame_progress = 0.094009526
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=1944194081]
 collision_layer = 2
@@ -147,6 +150,21 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1312455978]
 shape = SubResource("RectangleShape2D_obmiq")
+
+[node name="Sounds" type="Node2D" parent="." unique_id=712876925]
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="Sounds" unique_id=533581569]
+stream = ExtResource("4_s76qj")
+bus = &"SFX"
+
+[node name="Spawn" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1361736719]
+stream = ExtResource("5_j8u66")
+autoplay = true
+bus = &"SFX"
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Sounds" unique_id=55989]
+stream = ExtResource("6_l2gpr")
+bus = &"SFX"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]

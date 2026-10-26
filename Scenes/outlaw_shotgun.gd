@@ -98,6 +98,7 @@ func hit(damage):
 func death():
 	player.give_money(5)
 	shoot_timer.stop()
+	$Sounds/Death.play()
 	collision_layer = 0
 	collision_mask = 0
 	animated_sprite.play("death")
@@ -110,6 +111,7 @@ func death():
 
 func _on_timer_timeout() -> void:
 	shoot_timer.wait_time = randf_range(3, 6)
+	$Sounds/Shoot.play()
 	shoot_triple(2, 2, Color(0.651, 0.145, 0.0, 1.0), 250, 1)
 
 func shoot_triple(mask: int, layer: int, bullet_color: Color, bullet_speed: int, damage: int) -> void:

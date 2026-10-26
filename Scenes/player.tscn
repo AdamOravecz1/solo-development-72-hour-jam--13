@@ -10,6 +10,11 @@
 [ext_resource type="FontFile" uid="uid://cowoy8yrr4rp7" path="res://PixelOperator.ttf" id="7_3smsa"]
 [ext_resource type="Texture2D" uid="uid://chslhawopjraa" path="res://Sprites/DustKickUp.png" id="9_tx1dd"]
 [ext_resource type="Texture2D" uid="uid://dkgmpdlypg7dj" path="res://Sprites/Enemy.png" id="10_gymyn"]
+[ext_resource type="AudioStream" uid="uid://c2lm2cr27nrsn" path="res://Sounds/single-pistol-gunshot-33-37187.wav" id="11_gymyn"]
+[ext_resource type="AudioStream" uid="uid://dqhkvcyye6smh" path="res://Sounds/Spin2.mp3" id="12_pu2lt"]
+[ext_resource type="AudioStream" uid="uid://c6ehry5prqk01" path="res://Sounds/st3-footstep-sfx-323056.wav" id="13_ukyrk"]
+[ext_resource type="AudioStream" uid="uid://dqb2h2fahhwpl" path="res://Sounds/Death.mp3" id="14_7dp3o"]
+[ext_resource type="AudioStream" uid="uid://diqw46cxv8qui" path="res://Sounds/wood-surface-single-coin-payout-4-215284.wav" id="15_h4iuc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l6n3p"]
 atlas = ExtResource("2_8erm5")
@@ -315,5 +320,33 @@ sprite_frames = SubResource("SpriteFrames_83xs0")
 animation = &"kickup"
 frame = 3
 frame_progress = 1.0
+
+[node name="Control" type="Control" parent="." unique_id=638043529]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Shoot" type="AudioStreamPlayer" parent="Control" unique_id=1281642817]
+stream = ExtResource("11_gymyn")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="Reload" type="AudioStreamPlayer" parent="Control" unique_id=870299627]
+stream = ExtResource("12_pu2lt")
+bus = &"SFX"
+
+[node name="Walk" type="AudioStreamPlayer" parent="Control" unique_id=985494894]
+stream = ExtResource("13_ukyrk")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="Death" type="AudioStreamPlayer" parent="Control" unique_id=461727070]
+stream = ExtResource("14_7dp3o")
+bus = &"SFX"
+
+[node name="Pay" type="AudioStreamPlayer" parent="Control" unique_id=589114726]
+stream = ExtResource("15_h4iuc")
+bus = &"SFX"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

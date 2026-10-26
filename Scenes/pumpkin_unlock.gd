@@ -15,15 +15,18 @@ func _ready():
 func _shop():
 	canvas_layer.visible = !canvas_layer.visible
 	player.can_shoot = !canvas_layer.visible
-
-func _on_body_entered(body: Node2D) -> void:
-	if body == player:
+	if canvas_layer.visible:
 		animated_sprite.play("up")
+		$Sounds/GetUp.play()
+	else:
+		animated_sprite.play("down")
+		$Sounds/GetDown.play()
 		
 
 func _on_body_exited(body: Node2D) -> void:
-	if body == player:
+	if body == player and canvas_layer.visible:
 		animated_sprite.play("down")
+		$Sounds/GetDown.play()
 		player.can_shoot = true
 		canvas_layer.visible = false
 

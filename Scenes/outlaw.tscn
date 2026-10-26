@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://b1tgduyu1m57d" path="res://Scenes/outlaw.gd" id="1_y43i5"]
 [ext_resource type="Texture2D" uid="uid://knm57ja1d6ue" path="res://Sprites/Revolver.png" id="3_1fbm6"]
 [ext_resource type="Texture2D" uid="uid://chslhawopjraa" path="res://Sprites/DustKickUp.png" id="4_t8s3r"]
+[ext_resource type="AudioStream" uid="uid://c1g0werdfh3fl" path="res://Sounds/Death2.mp3" id="5_joqry"]
+[ext_resource type="AudioStream" uid="uid://c2lm2cr27nrsn" path="res://Sounds/single-pistol-gunshot-33-37187.wav" id="6_emkbf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gyt6s"]
 size = Vector2(18, 55)
@@ -178,6 +180,17 @@ visible = false
 position = Vector2(3, 18)
 sprite_frames = SubResource("SpriteFrames_1jm8b")
 animation = &"kickup"
+
+[node name="Sounds" type="Node2D" parent="." unique_id=371992087]
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1065698946]
+stream = ExtResource("5_joqry")
+bus = &"SFX"
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="Sounds" unique_id=2014983703]
+stream = ExtResource("6_emkbf")
+pitch_scale = 1.1
+bus = &"SFX"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_timer_timeout"]
